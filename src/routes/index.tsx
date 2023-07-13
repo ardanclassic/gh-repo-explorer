@@ -1,9 +1,13 @@
 import React from 'react'
+import { Route, Routes } from "react-router-dom";
+import HomePage from 'pages/home';
 
-const Routes = () => {
+const RoutePath = () => {
   return (
-    <div>Routes</div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+    </Routes>
   )
 }
 
-export default Routes
+export default RoutePath

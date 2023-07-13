@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px 5%;
+  span {
+    color: red;
+    margin: auto 8px;
+  }
+}
