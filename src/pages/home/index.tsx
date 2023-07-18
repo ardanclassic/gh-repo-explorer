@@ -4,7 +4,7 @@ import Loader from "components/loader";
 import UserBox from "components/box_user";
 import { GET_LIMIT_INFO, GET_USERNAME } from "services/core";
 import { themeStore } from "states/store";
-import nouser from 'assets/images/no-user.svg'
+import nouser from "assets/images/no-user.svg";
 
 const Home = () => {
   const theme: any = themeStore((state: any) => state.theme);
@@ -67,7 +67,7 @@ const Home = () => {
       } else {
         return (
           <>
-            <img src={nouser} alt="empty" className="w-1/2 mx-auto my-3" />
+            {blankStatus && <img src={nouser} alt="empty" className="w-1/2 mx-auto my-3" />}
             <div className="mx-auto">{blankStatus}</div>
           </>
         );
