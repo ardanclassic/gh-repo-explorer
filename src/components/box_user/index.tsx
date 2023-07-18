@@ -3,6 +3,7 @@ import { AccordionItem } from "@szhsin/react-accordion";
 import Loader from "components/loader";
 import { GET_REPOSITORY } from "services/core";
 import { themeStore } from "states/store";
+import blankimage from "assets/images/blank.svg";
 import "./style.scss";
 
 const UserBox = ({ user }: any) => {
@@ -23,7 +24,7 @@ const UserBox = ({ user }: any) => {
   const onScroll = async () => {
     if (boxRepo.current) {
       const { scrollTop, scrollHeight, clientHeight } = boxRepo.current;
-      if (scrollTop + clientHeight === scrollHeight) {
+      if (!subloading && scrollTop + clientHeight === scrollHeight) {
         setsubloading(true);
         setpage(page + 1);
         const getListRepo: any = await GET_REPOSITORY(user.login, page + 1);
@@ -71,7 +72,12 @@ const UserBox = ({ user }: any) => {
           </>
         );
       } else {
-        return <div className="text-sm">no repo exist . . .</div>;
+        return (
+          <>
+            <img src={blankimage} alt="blank" className="w-1/2 mx-auto my-3" />
+            <div className="mx-auto">no data . . .</div>
+          </>
+        );
       }
     }
   };

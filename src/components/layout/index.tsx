@@ -8,7 +8,7 @@ const PageLayout = ({ children }: any) => {
   return (
     <div className={`layout min-h-screen ${theme === "dark" ? "bg-black text-white" : ""}`}>
       <Header />
-      <div className="main-content py-8 px-[5%] min-h-[calc(100vh-168px)]">{children}</div>
+      <div className="main-content px-[5%] min-h-[calc(100vh-200px)]">{children}</div>
       <Footer />
     </div>
   );

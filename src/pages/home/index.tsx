@@ -4,6 +4,7 @@ import Loader from "components/loader";
 import UserBox from "components/box_user";
 import { GET_LIMIT_INFO, GET_USERNAME } from "services/core";
 import { themeStore } from "states/store";
+import nouser from 'assets/images/no-user.svg'
 
 const Home = () => {
   const theme: any = themeStore((state: any) => state.theme);
@@ -13,13 +14,15 @@ const Home = () => {
   const [blankStatus, setblankStatus] = useState("");
 
   const styles = {
-    actionBox: `wrapper flex flex-col gap-3 w-[300px] mx-auto px-3 py-6 rounded-3xl ${
-      theme === "dark" ? "text-white bg-slate-900" : "text-black shadow-[0_0_12px_1px_#ccc]"
+    actionBox: `wrapper flex flex-col gap-3 w-[300px] mx-auto px-3 py-6 rounded-3xl shadow-[0_0_16px_-4px_#ccc] ${
+      theme === "dark" ? "text-white bg-slate-900" : "text-black"
     }`,
     inputField: `font-semibold py-2 px-3 rounded-md outline-none border ${
       theme === "dark" ? "text-white bg-slate-900 border-slate-700" : "text-black border-gray-300"
     }`,
-    button: `py-2 px-6 rounded-md outline-none border-none cursor-pointer bg-[#1e90ff] disabled:bg-gray-500`,
+    button: `py-2 px-6 rounded-md outline-none border cursor-pointer disabled:hover:bg-white disabled:text-gray-300 font-semibold hover:bg-slate-300 hover:text-slate-900 ${
+      theme === "dark" ? " border-slate-500" : " shadow-[0_0_8px_0px_#ccc]"
+    }`,
   };
 
   const getData = async (e: any) => {
@@ -62,7 +65,12 @@ const Home = () => {
           </div>
         );
       } else {
-        return <div className="text-center mx-auto my-[20%]">{blankStatus}</div>;
+        return (
+          <>
+            <img src={nouser} alt="empty" className="w-1/2 mx-auto my-3" />
+            <div className="mx-auto">{blankStatus}</div>
+          </>
+        );
       }
     }
   };

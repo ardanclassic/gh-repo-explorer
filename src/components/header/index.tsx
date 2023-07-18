@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { themeStore } from "states/store";
+import themeicon from "assets/icons/theme.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -8,11 +9,9 @@ const Header = () => {
 
   const styles = {
     header: `header flex items-center justify-center w-[300px] min-h-[44px] py-2 px-4 mx-auto rounded-bl-2xl rounded-br-2xl ${
-      theme === "dark" ? " bg-slate-900" : " shadow-[0_0_12px_1px_#ccc]"
+      theme === "dark" ? " bg-slate-900 shadow-[0_0_16px_-4px_#ccc]" : " shadow-[0_0_12px_1px_#ccc]"
     }`,
-    themeBox: `theme flex items-center gap-2 justify-center w-[300px] mx-auto my-3 py-2 px-4 rounded-md font-semibold ${
-      theme === "dark" ? "text-white bg-slate-900" : "text-black shadow-[0_0_12px_1px_#ccc]"
-    }`,
+    themeIcon: `w-[36px] shadow-[0_0_8px_0_#ddd] cursor-pointer rounded-full mx-auto my-8`,
   };
 
   return (
@@ -23,14 +22,12 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={styles.themeBox}>
-        <div className="black cursor-pointer" onClick={() => changeTheme("dark")}>
-          Dark
-        </div>
-        <div className="white cursor-pointer" onClick={() => changeTheme("light")}>
-          Light
-        </div>
-      </div>
+      <img
+        src={themeicon}
+        alt="theme"
+        onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
+        className={styles.themeIcon}
+      />
     </>
   );
 };
