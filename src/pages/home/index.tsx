@@ -20,7 +20,7 @@ const Home = () => {
     inputField: `font-semibold py-2 px-3 rounded-md outline-none border ${
       theme === "dark" ? "text-white bg-slate-900 border-slate-700" : "text-black border-gray-300"
     }`,
-    button: `py-2 px-6 rounded-md outline-none border cursor-pointer disabled:hover:bg-white disabled:text-gray-300 font-semibold hover:bg-slate-300 hover:text-slate-900 ${
+    button: `py-2 px-6 rounded-md outline-none border cursor-pointer disabled:hover:bg-transparent disabled:text-gray-300 font-semibold hover:bg-slate-300 hover:text-slate-900 ${
       theme === "dark" ? " border-slate-500" : " shadow-[0_0_8px_0px_#ccc]"
     }`,
   };
