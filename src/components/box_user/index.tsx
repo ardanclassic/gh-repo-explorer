@@ -2,21 +2,33 @@ import { useState, useEffect, useRef } from "react";
 import { AccordionItem } from "@szhsin/react-accordion";
 import Loader from "components/loader";
 import { GET_REPOSITORY } from "services/core";
+import { themeStore } from "states/store";
 import "./style.scss";
 
 const UserBox = ({ user }: any) => {
+  const theme: any = themeStore((state: any) => state.theme);
   const boxRepo: any = useRef();
   const [loading, setloading] = useState(false);
+  const [subloading, setsubloading] = useState(false);
   const [userrepo, setuserrepo] = useState([]);
   const [page, setpage] = useState(1);
+
+  const styles = {
+    repobox: `relative text-sm p-2 rounded-md ${
+      theme === "dark" ? "text-white bg-slate-800" : "text-black bg-[#e7e7e7]"
+    }`,
+    repoArea: `content max-h-[250px] overflow-y-auto flex flex-col gap-2 px-2 py-3`,
+  };
 
   const onScroll = async () => {
     if (boxRepo.current) {
       const { scrollTop, scrollHeight, clientHeight } = boxRepo.current;
       if (scrollTop + clientHeight === scrollHeight) {
+        setsubloading(true);
         setpage(page + 1);
         const getListRepo: any = await GET_REPOSITORY(user.login, page + 1);
         setuserrepo((prevState): any => [...prevState, ...getListRepo.data]);
+        setsubloading(false);
       }
     }
   };
@@ -33,7 +45,7 @@ const UserBox = ({ user }: any) => {
     if (loading) {
       return (
         <div className="w-max mx-auto my-[24px]">
-          <Loader size={24} color="#000" />
+          <Loader size={24} color="#555" />
         </div>
       );
     } else {
@@ -42,7 +54,7 @@ const UserBox = ({ user }: any) => {
           <>
             {userrepo.map((repo: any) => {
               return (
-                <div key={repo.id} className="relative text-sm bg-gray-800 p-2 rounded-md">
+                <div key={repo.id} className={styles.repobox}>
                   <div className="name mb-2 font-semibold break-words">{repo.name}</div>
                   <div className="desc text-[12px] w-[85%] break-words">{repo.description}</div>
                   <div className="stars font-bold text-[12px] absolute top-2 right-2">
@@ -51,6 +63,11 @@ const UserBox = ({ user }: any) => {
                 </div>
               );
             })}
+            {subloading && (
+              <div className="w-max mx-auto my-[24px]">
+                <Loader size={24} color="#555" />
+              </div>
+            )}
           </>
         );
       } else {
@@ -60,13 +77,8 @@ const UserBox = ({ user }: any) => {
   };
 
   return (
-    <AccordionItem header={user.login} onClick={openBox}>
-      <div
-        className="content max-h-[250px] overflow-y-auto flex flex-col gap-2 px-2 py-3"
-        onClick={(e) => e.stopPropagation()}
-        onScroll={onScroll}
-        ref={boxRepo}
-      >
+    <AccordionItem header={user.login} className={`accordion-header ${theme}`} onClick={openBox}>
+      <div className={styles.repoArea} onClick={(e) => e.stopPropagation()} onScroll={onScroll} ref={boxRepo}>
         <ShowRepo />
       </div>
     </AccordionItem>

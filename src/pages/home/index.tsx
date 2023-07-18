@@ -3,13 +3,24 @@ import { Accordion } from "@szhsin/react-accordion";
 import Loader from "components/loader";
 import UserBox from "components/box_user";
 import { GET_LIMIT_INFO, GET_USERNAME } from "services/core";
-import "./style.scss";
+import { themeStore } from "states/store";
 
 const Home = () => {
+  const theme: any = themeStore((state: any) => state.theme);
   const [loading, setloading] = useState(false);
   const [username, setUsername] = useState("");
   const [userlist, setUserlist] = useState([]);
   const [blankStatus, setblankStatus] = useState("");
+
+  const styles = {
+    actionBox: `wrapper flex flex-col gap-3 w-[300px] mx-auto px-3 py-6 rounded-3xl ${
+      theme === "dark" ? "text-white bg-slate-900" : "text-black shadow-[0_0_12px_1px_#ccc]"
+    }`,
+    inputField: `font-semibold py-2 px-3 rounded-md outline-none border ${
+      theme === "dark" ? "text-white bg-slate-900 border-slate-700" : "text-black border-gray-300"
+    }`,
+    button: `py-2 px-6 rounded-md outline-none border-none cursor-pointer bg-[#1e90ff] disabled:bg-gray-500`,
+  };
 
   const getData = async (e: any) => {
     setloading(true);
@@ -35,7 +46,7 @@ const Home = () => {
     if (loading) {
       return (
         <div className="w-max mx-auto my-[20%]">
-          <Loader size={24} color="#000" />
+          <Loader size={24} color="#666" />
         </div>
       );
     } else {
@@ -57,7 +68,7 @@ const Home = () => {
   };
 
   return (
-    <div className="wrapper flex flex-col gap-3 w-[300px] mx-auto p-3">
+    <div className={styles.actionBox}>
       <div className="action-area">
         <form onSubmit={getData} className="flex flex-col gap-2">
           <input
@@ -66,13 +77,9 @@ const Home = () => {
             placeholder="Enter username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="font-semibold text-black py-2 px-3 rounded-md outline-none border-none"
+            className={styles.inputField}
           />
-          <button
-            disabled={!username}
-            type="submit"
-            className="py-2 px-6 rounded-md outline-none border-none cursor-pointer bg-[#1e90ff] disabled:bg-gray-500"
-          >
+          <button disabled={!username} type="submit" className={styles.button}>
             search
           </button>
         </form>
