@@ -1,7 +1,6 @@
 import { Octokit } from "octokit";
 
 const octokit = new Octokit({ auth: process.env.REACT_APP_ACCESS_TOKEN });
-console.log(process.env.REACT_APP_ACCESS_TOKEN);
 
 export const GET_USERNAME = (username: any) => {
   return new Promise((resolve, reject) => {
