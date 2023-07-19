@@ -40,8 +40,8 @@ const Home = () => {
       return getUser;
     } catch (error: any) {
       setloading(false);
-      setblankStatus("no user exist . . .");
-      console.log(error.response.data.message);
+      setblankStatus(error.response.data.message);
+      console.log(error.response);
     }
   };
 
