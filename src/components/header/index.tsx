@@ -14,6 +14,11 @@ const Header = () => {
     themeIcon: `w-[36px] shadow-[0_0_8px_0_#ddd] cursor-pointer rounded-full mx-auto my-8`,
   };
 
+  const setupTheme = (newtheme: string) => {
+    localStorage.setItem("theme", newtheme);
+    changeTheme(newtheme);
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -25,7 +30,7 @@ const Header = () => {
       <img
         src={themeicon}
         alt="theme"
-        onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
+        onClick={() => setupTheme(theme === "light" ? "dark" : "light")}
         className={styles.themeIcon}
       />
     </>
