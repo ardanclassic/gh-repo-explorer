@@ -9,8 +9,10 @@ G R E X a.k.a Github Repository Explorer is the simple application which integra
 ### Tech Stacks
 
 - React JS (using Create React App)
-- SCSS
+- Typescript
+- Octokit
 - Tailwind CSS
+- SCSS
 - Zustand (Global State Management)
 
 ## Available Scripts
