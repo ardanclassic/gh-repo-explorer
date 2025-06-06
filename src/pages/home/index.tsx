@@ -14,7 +14,7 @@ const Home = () => {
   const [blankStatus, setblankStatus] = useState("");
 
   const styles = {
-    actionBox: `wrapper flex flex-col gap-3 w-[300px] mx-auto px-3 py-6 rounded-3xl shadow-[0_0_16px_-4px_#ccc] ${
+    actionBox: `wrapper flex flex-col gap-3 w-[300px] mx-auto px-3 py-6 rounded-xl shadow-[0_0_16px_-4px_#ccc] ${
       theme === "dark" ? "text-white bg-slate-900" : "text-black"
     }`,
     inputField: `font-semibold py-2 px-3 rounded-md outline-none border ${
@@ -32,10 +32,10 @@ const Home = () => {
     e.preventDefault();
 
     try {
-      const getLimitInfo: any = await GET_LIMIT_INFO();
+      // const getLimitInfo: any = await GET_LIMIT_INFO();
       const getUser: any = await GET_USERNAME(username);
       getUser?.data?.items.length > 0 ? setUserlist(getUser?.data?.items) : setblankStatus("no user exist . . .");
-      console.log(getLimitInfo.data.rate.remaining);
+      // console.log(getLimitInfo.data.rate.remaining);
       setloading(false);
       return getUser;
     } catch (error: any) {
