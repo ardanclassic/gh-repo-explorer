@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Accordion } from "@szhsin/react-accordion";
 import Loader from "components/loader";
 import UserBox from "components/box_user";
